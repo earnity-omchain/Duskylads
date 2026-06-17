@@ -876,7 +876,7 @@ export default function Home() {
             animationDelay: "0ms",
           }}>
             <img
-              src="/hero.png"
+              src="/heroes.png"
               alt="Dusky Lads"
               style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 24 }}
               onError={(e) => {
