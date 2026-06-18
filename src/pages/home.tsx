@@ -354,7 +354,7 @@ function SuccessScreen({ wallet, xUsername }: { wallet: string; xUsername: strin
           margin: "0 auto 28px", fontSize: 32,
           animation: "float 3s ease-in-out infinite",
         }}>
-          🎩
+          DL
         </div>
         <h2 style={{ fontSize: 32, fontWeight: 800, color: "#fff", marginBottom: 12, letterSpacing: "-0.02em" }}>
           Welcome to the crew.
@@ -394,7 +394,7 @@ function AlreadySubmitted() {
           display: "flex", alignItems: "center", justifyContent: "center",
           margin: "0 auto 28px", fontSize: 32,
         }}>
-          🎩
+          DL
         </div>
         <h2 style={{ fontSize: 28, fontWeight: 800, color: "#fff", marginBottom: 12 }}>Already in the crew.</h2>
         <p style={{ fontSize: 15, color: COLORS.textMuted, lineHeight: 1.7 }}>
@@ -420,8 +420,6 @@ function WhitelistModal({ onClose }: { onClose: () => void }) {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [commentModalOpen, setCommentModalOpen] = useState(false);
-  const [commentText, setCommentText] = useState("");
 
   const step1Visible = true;
   const step2Visible = usernameLocked;
@@ -491,7 +489,7 @@ function WhitelistModal({ onClose }: { onClose: () => void }) {
           display: "flex", alignItems: "center", justifyContent: "center",
           margin: "0 auto 20px", fontSize: 28,
         }}>
-          🎩
+          DL
         </div>
         <h3 style={{ fontSize: 22, fontWeight: 800, color: "#fff", marginBottom: 8 }}>Welcome to the crew!</h3>
         <p style={{ fontSize: 14, color: COLORS.textMuted, lineHeight: 1.7 }}>
@@ -622,24 +620,21 @@ function WhitelistModal({ onClose }: { onClose: () => void }) {
           <TaskCard delay={60}>
             <TaskHeader num="04" title="Comment & tag 2 frens" subtitle="Reply and mention 2 people" done={commentDone} />
             {!commentDone ? (
-              <>
-                <button
-                  className="btn-task"
-                  onClick={() => setCommentModalOpen(true)}
-                  style={{
-                    width: "100%", padding: "12px 0", marginBottom: 14,
-                    background: COLORS.accentLight,
-                    border: `1px solid rgba(212,168,83,0.25)`,
-                    borderRadius: 10, color: ACCENT,
-                    fontFamily: "'Space Grotesk', sans-serif",
-                    fontWeight: 700, fontSize: 13, cursor: "pointer",
-                    letterSpacing: "0.04em",
-                  }}
-                >
-                  Write your comment →
-                </button>
-                {errors.comment && <p style={{ color: COLORS.error, fontSize: 12 }}>{errors.comment}</p>}
-              </>
+              <button
+                className="btn-task"
+                onClick={() => openAndMark(POST_URL, () => setCommentDone(true))}
+                style={{
+                  width: "100%", padding: "12px 0", marginBottom: 14,
+                  background: COLORS.accentLight,
+                  border: `1px solid rgba(212,168,83,0.25)`,
+                  borderRadius: 10, color: ACCENT,
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  fontWeight: 700, fontSize: 13, cursor: "pointer",
+                  letterSpacing: "0.04em",
+                }}
+              >
+                Go to Post on X →
+              </button>
             ) : (
               <Field
                 label="Paste your comment link"
@@ -696,110 +691,6 @@ function WhitelistModal({ onClose }: { onClose: () => void }) {
           </div>
         )}
       </div>
-
-      {/* Comment Modal inside whitelist modal */}
-      {commentModalOpen && (
-        <div
-          className="fade-in"
-          style={{
-            position: "fixed", inset: 0, zIndex: 200,
-            background: "rgba(0,0,0,0.85)", backdropFilter: "blur(8px)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            padding: 20,
-          }}
-          onClick={e => { if (e.target === e.currentTarget) setCommentModalOpen(false); }}
-        >
-          <div className="scale-in" style={{
-            background: "#151515", borderRadius: 16,
-            border: `1px solid ${COLORS.cardBorder}`,
-            padding: "28px 24px", width: "100%", maxWidth: 440,
-          }}>
-            <h3 style={{ fontSize: 17, fontWeight: 700, marginBottom: 6, color: "#fff" }}>Comment on the post</h3>
-            <p style={{ fontSize: 13, color: COLORS.textMuted, marginBottom: 20, lineHeight: 1.6 }}>
-              Write your comment, then post it on X — make sure to tag 2 frens.
-            </p>
-
-            <div style={{ marginBottom: 14 }}>
-              <Field
-                label="Your comment"
-                value={commentText}
-                onChange={setCommentText}
-                placeholder="Excited for Dusky Lads! @fren1 @fren2"
-                as="textarea"
-                rows={3}
-              />
-            </div>
-
-            <div style={{ display: "flex", gap: 8, marginBottom: 18 }}>
-              <button
-                onClick={() => {
-                  const text = encodeURIComponent(commentText || "Excited for Dusky Lads!");
-                  window.open(`https://x.com/intent/tweet?in_reply_to=2066563991925932501&text=${text}`, "_blank", "noopener,noreferrer");
-                }}
-                className="btn-task"
-                style={{
-                  flex: 1, padding: "11px 0",
-                  background: COLORS.accentLight,
-                  border: `1px solid rgba(212,168,83,0.25)`,
-                  borderRadius: 10, color: ACCENT,
-                  fontFamily: "'Space Grotesk', sans-serif",
-                  fontWeight: 700, fontSize: 13, cursor: "pointer",
-                }}
-              >
-                Post on X →
-              </button>
-            </div>
-
-            <Field
-              label="Paste your comment link after posting"
-              value={commentLink}
-              onChange={v => { setCommentLink(v); setErrors(e => ({ ...e, commentLink: "" })); }}
-              placeholder="https://x.com/..."
-              error={errors.commentLink}
-            />
-
-            <div style={{ display: "flex", gap: 8, marginTop: 18 }}>
-              <button
-                onClick={() => setCommentModalOpen(false)}
-                style={{
-                  flex: 1, padding: "11px 0",
-                  background: "transparent",
-                  border: `1px solid rgba(255,255,255,0.1)`,
-                  borderRadius: 10, color: COLORS.textDim,
-                  fontFamily: "'Space Grotesk', sans-serif",
-                  fontWeight: 600, fontSize: 13, cursor: "pointer",
-                  transition: "all 0.2s",
-                }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)"; e.currentTarget.style.color = "rgba(255,255,255,0.5)"; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; e.currentTarget.style.color = COLORS.textDim; }}
-              >
-                Cancel
-              </button>
-              <button
-                onClick={() => {
-                  if (!commentLink.trim()) {
-                    setErrors(e => ({ ...e, commentLink: "Paste your comment link first." }));
-                    return;
-                  }
-                  setCommentDone(true);
-                  setCommentModalOpen(false);
-                }}
-                className="btn-primary"
-                style={{
-                  flex: 2, padding: "11px 0",
-                  background: ACCENT,
-                  border: "none",
-                  borderRadius: 10, color: "#000",
-                  fontFamily: "'Space Grotesk', sans-serif",
-                  fontWeight: 800, fontSize: 13, cursor: "pointer",
-                }}
-              >
-                Confirm Comment
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
@@ -882,7 +773,7 @@ export default function Home() {
               onError={(e) => {
                 (e.target as HTMLImageElement).style.display = "none";
                 const parent = (e.target as HTMLImageElement).parentElement;
-                if (parent) parent.innerHTML = "<span style=\'font-size:64px\'>🎩</span>";
+                if (parent) parent.innerHTML = "<span style=\"font-size:64px\">DL</span>";
               }}
             />
           </div>
@@ -892,7 +783,7 @@ export default function Home() {
               fontSize: 11, fontWeight: 700, color: ACCENT,
               letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 16,
             }}>
-              1,555 Unique Lads · Ethereum
+              1,111 Unique Lads · Ethereum
             </p>
           </div>
 
@@ -910,7 +801,7 @@ export default function Home() {
             maxWidth: 420, margin: "0 auto 36px",
             animationDelay: "350ms",
           }}>
-            A collection of 1,555 hand-crafted lads living on Ethereum.
+            A collection of 1,111 hand-crafted lads living on Ethereum.
             Join the crew and secure your whitelist spot.
           </p>
 
@@ -977,7 +868,7 @@ export default function Home() {
               fontSize: 16, color: COLORS.textMuted, lineHeight: 1.8,
               maxWidth: 560, margin: "0 auto",
             }}>
-              Dusky Lads is a curated NFT collection of 1,555 unique characters,
+              Dusky Lads is a curated NFT collection of 1,111 unique characters,
               each with their own personality, style, and story. Built on Ethereum,
               designed for the culture.
             </p>
@@ -989,10 +880,10 @@ export default function Home() {
             gap: 20,
           }}>
             {[
-              { icon: "🎨", title: "Hand-Crafted Art", desc: "Every Lad is uniquely designed with meticulous attention to detail and character." },
-              { icon: "🔗", title: "Ethereum Native", desc: "Built on the most secure and decentralized blockchain for true digital ownership." },
-              { icon: "👥", title: "Community First", desc: "Join a tight-knit crew of collectors, artists, and Web3 enthusiasts." },
-              { icon: "🎁", title: "Holder Perks", desc: "Exclusive drops, early access, and special rewards for loyal Lads holders." },
+              { icon: "", title: "Hand-Crafted Art", desc: "Every Lad is uniquely designed with meticulous attention to detail and character." },
+              { icon: "", title: "Ethereum Native", desc: "Built on the most secure and decentralized blockchain for true digital ownership." },
+              { icon: "", title: "Community First", desc: "Join a tight-knit crew of collectors, artists, and Web3 enthusiasts." },
+              { icon: "", title: "Holder Perks", desc: "Exclusive drops, early access, and special rewards for loyal Lads holders." },
             ].map((item, i) => (
               <div key={i} className="slide-up" style={{
                 background: "rgba(255,255,255,0.015)",
@@ -1077,7 +968,7 @@ export default function Home() {
             DUSKY<span style={{ color: ACCENT }}>LADS</span>
           </span>
           <p style={{ fontSize: 13, color: COLORS.textMuted, marginBottom: 28 }}>
-            1,555 unique lads. One crew.
+            1,111 unique lads. One crew.
           </p>
 
           <div style={{ display: "flex", justifyContent: "center", gap: 16, marginBottom: 40 }}>
