@@ -851,75 +851,80 @@ export default function Home() {
         background: "linear-gradient(180deg, #050505 0%, #0a0a0a 50%, #050505 100%)",
       }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
-          <div className="slide-up" style={{ textAlign: "center", marginBottom: 60 }}>
-            <p style={{
-              fontSize: 11, fontWeight: 700, color: ACCENT,
-              letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 14,
-            }}>
-              About
-            </p>
-            <h2 style={{
-              fontSize: "clamp(28px, 5vw, 42px)", fontWeight: 800,
-              color: "#fff", marginBottom: 16, letterSpacing: "-0.02em",
-            }}>
-              What are <span style={{ color: ACCENT }}>Dusky Lads?</span>
-            </h2>
-            <p style={{
-              fontSize: 16, color: COLORS.textMuted, lineHeight: 1.8,
-              maxWidth: 560, margin: "0 auto",
-            }}>
-              Dusky Lads is a curated NFT collection of 1,111 unique characters,
-              each with their own personality, style, and story. Built on Ethereum,
-              designed for the culture.
-            </p>
-          </div>
-
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            gap: 20,
+         <div className="slide-up" style={{ textAlign: "center", marginBottom: 60 }}>
+          <p style={{
+            fontSize: 11, fontWeight: 700, color: ACCENT,
+            letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 14,
           }}>
-            {[
-              { icon: "", title: "Hand-Crafted Art", desc: "Every Lad is uniquely designed with meticulous attention to detail and character." },
-              { icon: "", title: "Ethereum Native", desc: "Built on the most secure and decentralized blockchain for true digital ownership." },
-              { icon: "", title: "Community First", desc: "Join a tight-knit crew of collectors, artists, and Web3 enthusiasts." },
-              { icon: "", title: "Holder Perks", desc: "Exclusive drops, early access, and special rewards for loyal Lads holders." },
-            ].map((item, i) => (
-              <div key={i} className="slide-up" style={{
-                background: "rgba(255,255,255,0.015)",
-                border: `1px solid ${COLORS.cardBorder}`,
-                borderRadius: 16,
-                padding: "28px 24px",
-                transition: "all 0.3s ease",
-                animationDelay: `${i * 100}ms`,
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.borderColor = "rgba(212,168,83,0.2)";
-                e.currentTarget.style.transform = "translateY(-4px)";
-                e.currentTarget.style.boxShadow = "0 12px 40px rgba(0,0,0,0.3)";
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.borderColor = COLORS.cardBorder;
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "none";
-              }}
-              >
-                <div style={{
-                  width: 48, height: 48, borderRadius: 12,
-                  background: COLORS.accentLight,
-                  border: `1px solid rgba(212,168,83,0.2)`,
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: 22, marginBottom: 16,
-                }}>
-                  {item.icon}
-                </div>
-                <h3 style={{ fontSize: 16, fontWeight: 700, color: "#fff", marginBottom: 8 }}>{item.title}</h3>
-                <p style={{ fontSize: 14, color: COLORS.textMuted, lineHeight: 1.7 }}>{item.desc}</p>
-              </div>
-            ))}
-          </div>
+            About
+          </p>
+          <h2 style={{
+            fontSize: "clamp(28px, 5vw, 42px)", fontWeight: 800,
+            color: "#fff", marginBottom: 16, letterSpacing: "-0.02em",
+          }}>
+            What are <span style={{ color: ACCENT }}>Dusky Lads?</span>
+          </h2>
+          <p style={{
+            fontSize: 16, color: COLORS.textMuted, lineHeight: 1.8,
+            maxWidth: 560, margin: "0 auto",
+          }}>
+            Dusky Lads is a curated NFT collection of 1,111 unique characters,
+            each with their own personality, style, and story. Built on Ethereum,
+            designed for the culture.
+          </p>
         </div>
-      </section>
+
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+          gap: 20,
+        }}>
+          {[
+            { icon: "/001.jpg", title: "Hand-Crafted Art", desc: "Every Lad is uniquely designed with meticulous attention to detail and character." },
+            { icon: "/002.jpg", title: "Ethereum Native", desc: "Built on the most secure and decentralized blockchain for true digital ownership." },
+            { icon: "/003.jpg", title: "Community First", desc: "Join a tight-knit crew of collectors, artists, and Web3 enthusiasts." },
+            { icon: "/004.jpg", title: "Holder Perks", desc: "Exclusive drops, early access, and special rewards for loyal Lads holders." },
+          ].map((item, i) => (
+            <div key={i} className="slide-up" style={{
+              background: "rgba(255,255,255,0.015)",
+              border: `1px solid ${COLORS.cardBorder}`,
+              borderRadius: 16,
+              padding: "28px 24px",
+              transition: "all 0.3s ease",
+              animationDelay: `${i * 100}ms`,
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.borderColor = "rgba(212,168,83,0.2)";
+              e.currentTarget.style.transform = "translateY(-4px)";
+              e.currentTarget.style.boxShadow = "0 12px 40px rgba(0,0,0,0.3)";
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.borderColor = COLORS.cardBorder;
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow = "none";
+            }}
+            >
+              <div style={{
+                width: 48, height: 48, borderRadius: 12,
+                background: COLORS.accentLight,
+                border: `1px solid rgba(212,168,83,0.2)`,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: 22, marginBottom: 16,
+                overflow: "hidden",
+              }}>
+                <img
+                 src={item.icon}
+                 alt={item.title}
+                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
+               />
+             </div>
+            <h3 style={{ fontSize: 16, fontWeight: 700, color: "#fff", marginBottom: 8 }}>{item.title}</h3>
+          <p style={{ fontSize: 14, color: COLORS.textMuted, lineHeight: 1.7 }}>{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* ── CTA Section ────────────────────────────────────────── */}
       <section style={{
