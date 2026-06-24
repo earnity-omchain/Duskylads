@@ -24,7 +24,7 @@ const COLORS = {
 };
 
 const ACCENT = COLORS.accent;
-const POST_URL = "https://x.com/i/status/2066563991925932501";
+const POST_URL = "https://x.com/DuskyLads/status/2069796834034459001";
 const FOLLOW_URL = "https://x.com/DuskyLads";
 const LS_KEY = "dusky_submitted";
 
